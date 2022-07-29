@@ -1,0 +1,1 @@
+## Sentiment Classifier for Japanese texts using fine-tuned BERT

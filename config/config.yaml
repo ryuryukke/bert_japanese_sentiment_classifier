@@ -1,0 +1,14 @@
+model:
+  type: cl-tohoku/bert-base-japanese-whole-word-masking
+training:
+  train_size: 0.6
+  valid_size: 0.2
+  test_size: 0.2
+  batch_size: 64
+tokenizer:
+  type: cl-tohoku/bert-base-japanese-whole-word-masking
+  add_special_tokens: true
+  max_length: 64
+  pad_to_max_length: true
+data:
+  path: ../data/tweets.pkl
