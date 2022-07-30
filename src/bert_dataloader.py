@@ -25,7 +25,7 @@ class BERTDataloader:
             encoded_dicts.append(encoded_dict)
         return encoded_dicts
 
-    def __call__(self, sents: list[str], targets: list[int]):
+    def __call__(self, sents: list[str], targets: list[list]):
         encoded_dicts = self._encode_sents(sents)
         dataset = NLPDataset(encoded_dicts, targets)
         return DataLoader(dataset, batch_size=self.batch_size)

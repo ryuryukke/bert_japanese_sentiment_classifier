@@ -35,7 +35,9 @@ class Preprocessor:
             train_param["test_size"],
         )
         assert train_size + valid_size + test_size == 1, "train, valid, testの割合が不適切です"
-        assert len(dataset[0]) == 2, "[['文1', 'ラベル'], ['文2', 'ラベル'], ...]というデータを用意してください"
+        assert (
+            len(dataset[0]) == 2 and len(dataset[0][1]) == 2
+        ), "[['文1', [ポジラベル, ネガラベル]], ['文2', [ポジラベル, ネガラベル]], ...]というデータを用意してください"
         idx_lst = list(range(len(dataset)))
         train_idxes, test_idxes, _, _ = train_test_split(
             idx_lst, idx_lst, test_size=test_size, random_state=train_param["random_seed"]
@@ -72,6 +74,7 @@ class Preprocessor:
         valid_dataloader = self._create_dataloader(sents["valid"], targets["valid"])
         test_dataloader = self._create_dataloader(sents["test"], targets["test"])
         print("End creating dataloader...")
+        self._dump_dataloader()
         return train_dataloader, valid_dataloader, test_dataloader
 
 
