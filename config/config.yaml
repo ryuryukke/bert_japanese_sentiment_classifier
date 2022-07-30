@@ -1,15 +1,18 @@
 MODEL_PARAM:
   type: cl-tohoku/bert-base-japanese-whole-word-masking
+  n_label: 2
 TRAIN_PARAM:
   train_size: 0.6
   valid_size: 0.2
   test_size: 0.2
   batch_size: 64
   random_seed: 42
+  learning_rate: 1.0e-5
+  n_epoch: 3
 TOKENIZER_PARAM:
   type: cl-tohoku/bert-base-japanese-whole-word-masking
   add_special_tokens: true
   max_length: 64
   pad_to_max_length: true
 DATA_PARAM:
-  path: ../data/tweets.pkl
+  train_data_path: ../data/tweets.pkl
