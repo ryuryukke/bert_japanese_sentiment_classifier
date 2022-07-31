@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 
 class NLPDataset(Dataset):
     # map from keys to data samples
-    def __init__(self, encoded_dicts: list[dict], targets: list[int]):
+    def __init__(self, encoded_dicts: list[dict], targets: list[list]):
         # encoded_dicts is a list that contains encoded_dict for input text.
         self.encoded_dicts = encoded_dicts
         self.targets = targets
