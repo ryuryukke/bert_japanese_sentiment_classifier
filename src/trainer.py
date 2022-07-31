@@ -1,13 +1,14 @@
 import torch
 import torch.nn as nn
 from torch.optim import Adam
+import numpy as np
+
 import yaml
 from tqdm import tqdm
-from bert_binary_classifier import BertBinaryClassifier
 import datetime
 import subprocess
-import numpy as np
-from preprocessor import Preprocessor
+
+from bert_binary_classifier import BertBinaryClassifier
 
 
 class Trainer:
@@ -71,10 +72,6 @@ class Trainer:
 
             all_targets += targets.cpu().tolist()
             outputs += nn.Softmax(dim=1)(logits).cpu().tolist()
-
-            # from IPython.core.debugger import Pdb
-
-            # Pdb().set_trace()
 
         accuracy = self._cal_accuracy(all_targets, outputs)
 
