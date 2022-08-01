@@ -25,7 +25,7 @@ Please feel free to clone this repo, and try !
  Then, see quickstart.ipynb.
 
 ## 🚨 Caution
-- When you train, you have to fetch and shape dataset in following manner.
+- When you train, you have to fetch and shape dataset in following manner, then save your dataset in "/data" directory.
     - We can't share the dataset and trained model from [Twitter日本語評判分析データセット](https://www.db.info.gifu-u.ac.jp/sentiment_analysis/) because of the license, CC-BY-ND 4.0.
 
 ```python
