@@ -12,7 +12,10 @@ Please feel free to clone this repo, and try !
 - Undersampling original dataset so that the dataset size of both positive and negative labels is equal
 ## Dataset size
 - Both negative and positive tweets are 8458 rows, summing up to 16916 rows.
-
+## Dependencies
+- Python 3.9.10
+- Pytorch 1.10.2
+- Transformers 4.16.0
 ## 🚀 Quick Start
 
  ```python
@@ -21,8 +24,5 @@ Please feel free to clone this repo, and try !
  ```
  Then, see quickstart.ipynb.
 
-## Dependencies
-- Python 3.9.10
-- Pytorch 1.10.2
-- Transformers 4.16.0
+
 
