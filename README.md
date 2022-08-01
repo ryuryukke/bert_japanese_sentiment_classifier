@@ -22,7 +22,7 @@ Please feel free to clone this repo, and try !
  $ git clone https://github.com/ryuryukke/bert_japanese_sentiment_classifier.git
  $ cd src
  ```
- Then, see quickstart.ipynb.
+ Then, see [quickstart.ipynb](https://github.com/ryuryukke/bert_japanese_sentiment_classifier/blob/master/src/quickstart.ipynb).
 
 ## 🚨 Caution
 - When you train, you have to fetch and shape dataset in following manner, then save your dataset in "/data" directory.
