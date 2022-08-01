@@ -90,6 +90,7 @@ class Trainer:
         dt_now = datetime.datetime.now()
         dir_name = f"{dt_now.year}_{dt_now.month}_{dt_now.day}"
         dir_path = f"../model/{dir_name}"
+        subprocess.call(["mkdir", "-p", "../model"])
         subprocess.call(["mkdir", "-p", dir_path])
         torch.save(self.model.state_dict(), f"{dir_path}/{dt_now.hour}_{dt_now.minute}_epoch_{epoch + 1}.pth")
         return
