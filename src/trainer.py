@@ -1,13 +1,14 @@
 import torch
 import torch.nn as nn
 from torch.optim import Adam
+import numpy as np
+
 import yaml
 from tqdm import tqdm
-from bert_binary_classifier import BertBinaryClassifier
 import datetime
 import subprocess
-import numpy as np
-from preprocessor import Preprocessor
+
+from bert_binary_classifier import BertBinaryClassifier
 
 
 class Trainer:
@@ -66,17 +67,13 @@ class Trainer:
                 else:
                     logits = self.model(input_ids, attention_mask)
 
-            # from IPython.core.debugger import Pdb
-
-            # Pdb().set_trace()
-
             loss = self.criterion(logits, targets)
             losses.append(loss.item())
 
             all_targets += targets.cpu().tolist()
-            outputs += logits.sigmoid().cpu().tolist()
+            outputs += nn.Softmax(dim=1)(logits).cpu().tolist()
 
-        accuracy = self._cal_accuracy(targets, outputs)
+        accuracy = self._cal_accuracy(all_targets, outputs)
 
         return {"loss": np.array(losses).mean(), "accuracy": accuracy}
 
@@ -91,10 +88,10 @@ class Trainer:
 
     def _save_model(self, epoch):
         dt_now = datetime.datetime.now()
-        dir_name = f"{dt_now.year}_{dt_now.month}_{dt_now.day}_{dt_now.hour}_{dt_now.minute}"
+        dir_name = f"{dt_now.year}_{dt_now.month}_{dt_now.day}"
         dir_path = f"../model/{dir_name}"
         subprocess.call(["mkdir", "-p", dir_path])
-        torch.save(self.model.state_dict(), f"{dir_path}/epoch_{epoch + 1}.pth")
+        torch.save(self.model.state_dict(), f"{dir_path}/{dt_now.hour}_{dt_now.minute}_epoch_{epoch + 1}.pth")
         return
 
     def __call__(self, train_dataloader, valid_dataloader, test_dataloader):
@@ -105,15 +102,7 @@ class Trainer:
             print(f"epoch {epoch + 1}: train_loss = {train_res['loss']}")
             self._save_model(epoch)
             valid_res = self._test_loop(valid_dataloader)
-            print(f"epoch {epoch + 1}: valid_loss = {valid_res['loss']}, accuracy = {valid_res['accuracy']}")
+            print(f"epoch {epoch + 1}: valid_loss = {valid_res['loss']}, valid_accuracy = {valid_res['accuracy']}")
             test_res = self._test_loop(test_dataloader)
-            print(f"epoch {epoch + 1}: valid_loss = {test_res['loss']}, accuracy = {test_res['accuracy']}")
+            print(f"epoch {epoch + 1}: test_loss = {test_res['loss']}, test_accuracy = {test_res['accuracy']}")
         return
-
-
-preprocessor = Preprocessor("../config/config.yaml")
-train_dataloader, valid_dataloader, test_dataloader = preprocessor()
-trainer = Trainer("../config/config.yaml")
-# trainer(train_dataloader, valid_dataloader, test_dataloader)
-
-trainer._test_loop(train_dataloader, True, "../model/2022_7_31_4_31/epoch_1.pth")

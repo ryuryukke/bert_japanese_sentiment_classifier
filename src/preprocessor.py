@@ -2,11 +2,6 @@ import pickle
 import yaml
 from sklearn.model_selection import train_test_split
 from bert_dataloader import BERTDataloader
-from torch.utils.data import DataLoader
-
-"""
-Prepare the dataset for traning BERT model
-"""
 
 
 class Preprocessor:
@@ -23,7 +18,7 @@ class Preprocessor:
         return cfg
 
     def _load_dataset(self):
-        with open(self.cfg["DATA_PARAM"]["path"], "rb") as f:
+        with open(self.cfg["DATA_PARAM"]["train_data_path"], "rb") as f:
             dataset = pickle.load(f)
         return dataset
 
@@ -74,10 +69,4 @@ class Preprocessor:
         valid_dataloader = self._create_dataloader(sents["valid"], targets["valid"])
         test_dataloader = self._create_dataloader(sents["test"], targets["test"])
         print("End creating dataloader...")
-        self._dump_dataloader()
         return train_dataloader, valid_dataloader, test_dataloader
-
-
-# test
-preprocessor = Preprocessor("../config/config.yaml")
-train_dataloader, valid_dataloader, test_dataloader = preprocessor()
