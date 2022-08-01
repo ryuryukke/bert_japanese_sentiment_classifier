@@ -5,7 +5,7 @@ Please feel free to clone this repo, and try !
 ### Content
 - Fine-tuning the Japanese pre-trained BERT model for negative-positive classification.
 ### Pre-trained BERT model
-- [cl-tohoku BERT](https://huggingface.co/cl-tohoku/bert-base-japanese-whole-word-masking)
+- [cl-tohoku/bert-base-japanese-whole-word-masking](https://huggingface.co/cl-tohoku/bert-base-japanese-whole-word-masking)
 ### Dataset
 - [Twitter日本語評判分析データセット](https://www.db.info.gifu-u.ac.jp/sentiment_analysis/)
 ### How to shape the dataset
@@ -13,7 +13,7 @@ Please feel free to clone this repo, and try !
 ### Dataset size
 - Both negative and positive tweets are 8458 rows, summing up to 16916 rows.
 
-### 🚀 Quick Start
+## 🚀 Quick Start
 
  ```python
  $ git clone https://github.com/ryuryukke/bert_japanese_sentiment_classifier.git
