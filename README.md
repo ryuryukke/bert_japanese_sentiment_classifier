@@ -3,15 +3,15 @@
 Please feel free to clone this repo, and try ! 
 
 ## Content
-- Fine-tuning the Japanese pre-trained BERT model for negative-positive classification.
+- Fine-tuning the Japanese pre-trained BERT model for positive-negative classification.
 ## Pre-trained BERT model
 - [cl-tohoku/bert-base-japanese-whole-word-masking](https://huggingface.co/cl-tohoku/bert-base-japanese-whole-word-masking)
 ## Dataset
 - [Twitter日本語評判分析データセット](https://www.db.info.gifu-u.ac.jp/sentiment_analysis/)
 ## How to shape the dataset
-- Undersampling original dataset so that the dataset size of both positive and negative labels is equal
+- Undersampling original dataset so that the dataset size of both positive and negative labels are equal.
 ## Dataset size
-- Both negative and positive tweets are 8458 rows, summing up to 16916 rows.
+- Both positive adn negative tweets are 8458 rows, summing up to 16916 rows.
 ## Dependencies
 - Python 3.9.10
 - Pytorch 1.10.2
