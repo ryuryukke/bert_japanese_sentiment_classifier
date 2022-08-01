@@ -17,8 +17,8 @@ class Preprocessor:
             cfg = yaml.safe_load(f)
         return cfg
 
-    def _load_dataset(self):
-        with open(self.cfg["DATA_PARAM"]["train_data_path"], "rb") as f:
+    def _load_pickled_dataset(self, path: str):
+        with open(path, "rb") as f:
             dataset = pickle.load(f)
         return dataset
 
@@ -57,9 +57,9 @@ class Preprocessor:
         bert_dataloader = BERTDataloader(self.cfg)
         return bert_dataloader(sents, targets)
 
-    def __call__(self):
+    def __call__(self, path: str):
         print("Start loading dataset...")
-        dataset = self._load_dataset()
+        dataset = self._load_pickled_dataset(path)
         print("End loading dataset...")
         print("Start splitting dataset...")
         sents, targets = self._split_dataset(dataset)
