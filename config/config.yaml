@@ -14,5 +14,3 @@ TOKENIZER_PARAM:
   add_special_tokens: true
   max_length: 64
   pad_to_max_length: true
-DATA_PARAM:
-  train_data_path: ../data/tweets.pkl
