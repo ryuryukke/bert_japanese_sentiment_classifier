@@ -30,10 +30,10 @@ Please feel free to clone this repo, and try !
 
 ```python
 your_own_dataset = [
-    [pos_sent_1, [neg_flag(=0), pos_flag(=1)]],
-    [neg_sent_2, [neg_flag(=1), pos_flag(=0)]],
+    [pos_sent_1, [pos_flag(=1), neg_flag(=0)]],
+    [neg_sent_2, [pos_flag(=0), neg_flag(=1)]],
     ...,
-    [pos_sent_n, [neg_flag(=0), pos_flag(=1)]]
+    [pos_sent_n, [pos_flag(=1), neg_flag(=0)]]
     ]
 ```
 
