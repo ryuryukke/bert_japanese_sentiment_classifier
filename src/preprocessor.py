@@ -22,7 +22,7 @@ class Preprocessor:
             dataset = pickle.load(f)
         return dataset
 
-    def _split_dataset(self, dataset: list[list[str, int]]):
+    def _split_dataset(self, dataset: list[list]) -> tuple(dict[str, list[str]], dict[str, list[list]]):
         train_param = self.cfg["TRAIN_PARAM"]
         train_size, valid_size, test_size = (
             train_param["train_size"],
