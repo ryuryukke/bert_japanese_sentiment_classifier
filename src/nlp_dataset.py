@@ -12,7 +12,7 @@ class NLPDataset(Dataset):
     def __len__(self):
         return len(self.encoded_dicts)
 
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx: int) -> dict[str, torch.tensor]:
         encoded_dict = self.encoded_dicts[idx]
         target = self.targets[idx]
         input_ids = torch.tensor(encoded_dict["input_ids"])

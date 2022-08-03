@@ -27,13 +27,13 @@ class Trainer:
             cfg = yaml.safe_load(f)
         return cfg
 
-    def _load_pretrained_model(self, pretrained_model_path):
+    def _load_pretrained_model(self, pretrained_model_path: str):
         model = BertBinaryClassifier(self.cfg)
         model.load_state_dict(torch.load(pretrained_model_path))
         model.eval()
         return model
 
-    def _train_loop(self, train_dataloader):
+    def _train_loop(self, train_dataloader) -> dict[str, float]:
         losses = []
         self.model.train()
         self.optimizer.zero_grad()
@@ -51,7 +51,7 @@ class Trainer:
             losses.append(loss.item())
         return {"loss": np.array(losses).mean()}
 
-    def _test_loop(self, test_dataloader, load_pretrained_model=False, pretrained_model_path=None):
+    def _test_loop(self, test_dataloader, load_pretrained_model=False, pretrained_model_path=None) -> dict[str, float]:
         losses, outputs, all_targets = [], [], []
         self.model.eval()
 
@@ -77,7 +77,7 @@ class Trainer:
 
         return {"loss": np.array(losses).mean(), "accuracy": accuracy}
 
-    def _cal_accuracy(self, targets, outputs):
+    def _cal_accuracy(self, targets: list[list], outputs: list[list]) -> float:
         assert len(targets) == len(outputs), "教師ラベルと予測ラベルの数が不一致です。"
         match_cnt = 0
         for target, output in zip(targets, outputs):
@@ -86,16 +86,16 @@ class Trainer:
                 match_cnt += 1
         return match_cnt / len(targets)
 
-    def _save_model(self, epoch):
+    def _save_model(self, epoch: int) -> None:
         dt_now = datetime.datetime.now()
         dir_name = f"{dt_now.year}_{dt_now.month}_{dt_now.day}"
         dir_path = f"../model/{dir_name}"
         subprocess.call(["mkdir", "-p", "../model"])
         subprocess.call(["mkdir", "-p", dir_path])
         torch.save(self.model.state_dict(), f"{dir_path}/{dt_now.hour}_{dt_now.minute}_epoch_{epoch + 1}.pth")
-        return
+        return None
 
-    def __call__(self, train_dataloader, valid_dataloader, test_dataloader):
+    def __call__(self, train_dataloader, valid_dataloader, test_dataloader) -> None:
         self.model.train()
         self.optimizer.zero_grad()
         for epoch in range(self.epoch):
