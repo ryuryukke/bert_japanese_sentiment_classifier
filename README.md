@@ -13,9 +13,9 @@ Please feel free to clone this repo, and try !
 ## Dataset size
 - Both positive adn negative tweets are 8458 rows, summing up to 16916 rows.
 ## Dependencies
-- Python 3.9.10
-- Pytorch 1.10.2
-- Transformers 4.16.0
+- python==3.9.10
+- torch==1.10.2
+- transformers==4.16.0
 ## 🚀 Quick Start
 
  ```python
